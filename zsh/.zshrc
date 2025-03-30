@@ -54,10 +54,24 @@ alias remove="paru -Rns"
 
 eval "$(starship init zsh)"
 if [[ $(tty) == *"pts"* ]]; then
-   fastfetch --logo-type small
+   fastfetch
 else
     echo
     if [ -f /bin/hyprctl ]; then
         echo "Start Hyprland with command Hyprland"
     fi
 fi
+
+# pnpm
+export PNPM_HOME="/home/anakafeel/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+if [ -e /home/anakafeel/.nix-profile/etc/profile.d/nix.sh ]; then . /home/anakafeel/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

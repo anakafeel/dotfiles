@@ -16,7 +16,7 @@ bindle= Shift,F12, exec,hyprshade toggle  blue-light-filter
 
 #!
 ##! Essentials for beginners
-bind = , Super, exec, true # Open app launcher
+#bind = , Super, exec, true # Open app launcher
 ##! Actions
 # Screenshot, Record, OCR, Color picker, Clipboard history
 bind = Super ,R ,exec,sh ~/.config/ags/scripts/color_generation/wallpapers.sh -r

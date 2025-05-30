@@ -14,3 +14,5 @@ keybind = ctrl+shift+d=new_split:right
 keybind = ctrl+shift+a=new_split:left
 keybind = ctrl+shift+n=new_tab
 keybind = ctrl+alt+n=new_window
+
+background-opacity = 0.5

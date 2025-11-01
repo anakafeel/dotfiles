@@ -1,0 +1,1 @@
+FEDORA-WORKSTATION/fish/auto-Hypr.fish

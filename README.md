@@ -57,4 +57,120 @@ You can find the installation script [here](https://github.com/GeodeArc/GeoDots/
 | ![Screenshot 1](https://github.com/user-attachments/assets/04c014d9-7204-49b3-bd35-74b3f4683313) | ![Screenshot 2](https://github.com/user-attachments/assets/20d41a1a-c778-41d7-9772-7678424fe0e5) |
 |---|---|
 
+----
+## 🔑 AstroNvim — Essential Keybindings
+
+A quick reference for the most important **AstroNvim** keybindings used in my Neovim setup.  
+These cover navigation, LSP, Git, terminals, debugging, testing, and fuzzy finding.
+<img width="1910" height="1035" alt="image" src="https://github.com/user-attachments/assets/b5c434d3-9210-45df-ae00-f372f6900735" />
+
+
+---
+
+### 🚀 General
+
+| Action | Keybinding |
+|-------|------------|
+| Open keymap helper | `<Space>fk` |
+| Save file | `<Ctrl-s>` |
+| Quit window | `<Space>q` |
+| Close all buffers except current | `<Space>bo` |
+| Toggle line diagnostics | `gl` |
+
+---
+
+### 📁 File Explorer (Neo-tree)
+
+| Action | Keybinding |
+|-------|------------|
+| Toggle file tree | `<Space>e` |
+| Focus file tree | `<Space>o` |
+| Refresh tree | `R` (inside Neo-tree) |
+
+---
+
+### 🔍 Fuzzy Finding (Snacks Picker)
+
+| Action | Keybinding |
+|-------|------------|
+| Find files | `<Space>ff` |
+| Find all (including hidden) | `<Space>fF` |
+| Live grep | `<Space>fw` |
+| Open buffers | `<Space>fb` |
+| Recent files | `<Space>fo` |
+
+---
+
+### 🧭 Navigation
+
+| Action | Keybinding |
+|-------|------------|
+| Move between splits | `Ctrl + h/j/k/l` |
+| Resize splits | `Ctrl + Arrow Keys` |
+| Jump to definition | `gd` |
+| Go to declaration | `gD` |
+| List references | `grr` or `<Space>lR` |
+| Rename symbol | `<Space>lr` |
+| Hover documentation | `K` |
+
+---
+
+### 🧩 LSP Tools
+
+| Action | Keybinding |
+|-------|------------|
+| Show symbols outline | `<Space>lS` |
+| Format buffer | `<Space>lf` |
+| Code actions | `<Space>la` |
+
+---
+
+### 💻 Terminal (ToggleTerm)
+
+| Action | Keybinding |
+|-------|------------|
+| Floating terminal | `<Space>tf` |
+| Horizontal terminal | `<Space>th` |
+| Vertical terminal | `<Space>tv` |
+| Lazygit terminal | `<Space>tl` |
+| Toggle terminal | `Ctrl + '` or `F7` |
+
+---
+
+### 🐞 Debugging (nvim-dap)
+
+| Action | Keybinding |
+|-------|------------|
+| Start / Continue | `<Space>dc` or `F5` |
+| Toggle breakpoint | `<Space>db` or `F9` |
+| Step over | `<Space>do` |
+| Step into | `<Space>di` |
+| Step out | `<Space>dO` |
+| Open debug UI | `<Space>du` |
+| Evaluate expression | `<Space>dE` |
+
+---
+
+### 🧪 Testing (Neotest)
+
+| Action | Keybinding |
+|-------|------------|
+| Run nearest test | `<leader>tn` |
+| Run test file | `<leader>tf` |
+| Toggle test summary | `<leader>ts` |
+| Open test output | `<leader>to` |
+
+---
+
+### 🌿 Git
+
+| Action | Keybinding |
+|-------|------------|
+| Open Lazygit | `<Space>tl` or `<Space>gg` |
+| Git commits | `<Space>gc` |
+| Git status | `<Space>gt` |
+| Git branches | `<Space>gb` |
+
+---
+
 

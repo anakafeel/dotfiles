@@ -66,6 +66,8 @@ output "DP-2" {
 ███████╗██║  ██║   ██║   ╚██████╔╝╚██████╔╝   ██║
 ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝  ╚═════╝    ╚═╝
 */
+// Make sure this is NOT "1"
+
 layout {
   gaps 9
   center-focused-column "never"
@@ -113,8 +115,8 @@ layout {
 /*
  █████╗ ███╗   ██╗██╗███╗   ███╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
 ██╔══██╗████╗  ██║██║████╗ ████║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
-███████║██╔██╗ ██║██║██╔████╔██║███████║   ██║   ██║██║   ██║██╔██╗ ██║
-██╔══██║██║╚██╗██║██║██║╚██╔╝██║██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
+███████║██╔██╗ ██║██║██╔████╔██║███████║   ██║   ██║██║   ██║██╔██╗  ██║
+██╔══██║██║╚██╗ ██║██║██║╚██╔╝██║██╔══██║   ██║   ██║██║   ██║██║╚██╗ ██║
 ██║  ██║██║ ╚████║██║██║ ╚═╝ ██║██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
 ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
 */
@@ -236,7 +238,7 @@ layer-rule {
 ██╗    ██╗██╗███╗   ██╗██████╗  ██████╗ ██╗    ██╗    ██████╗ ██╗   ██╗██╗     ███████╗███████╗
 ██║    ██║██║████╗  ██║██╔══██╗██╔═══██╗██║    ██║    ██╔══██╗██║   ██║██║     ██╔════╝██╔════╝
 ██║ █╗ ██║██║██╔██╗ ██║██║  ██║██║   ██║██║ █╗ ██║    ██████╔╝██║   ██║██║     █████╗  ███████╗
-██║███╗██║██║██║╚██╗██║██║  ██║██║   ██║██║███╗██║    ██╔══██╗██║   ██║██║     ██╔══╝  ╚════██║
+██║███╗██║██║██║╚██╗ ██║██║  ██║██║   ██║██║███╗██║    ██╔══██╗██║   ██║██║     ██╔══╝  ╚════██║
 ╚███╔███╔╝██║██║ ╚████║██████╔╝╚██████╔╝╚███╔███╔╝    ██║  ██║╚██████╔╝███████╗███████╗███████║
  ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝  ╚═════╝  ╚══╝╚══╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝╚══════╝
 */ 
@@ -355,7 +357,7 @@ window-rule {
 ██╗  ██╗███████╗██╗   ██╗██████╗ ██╗███╗   ██╗██████╗ ███████╗
 ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔══██╗██║████╗  ██║██╔══██╗██╔════╝
 █████╔╝ █████╗   ╚████╔╝ ██████╔╝██║██╔██╗ ██║██║  ██║███████╗
-██╔═██╗ ██╔══╝    ╚██╔╝  ██╔══██╗██║██║╚██╗██║██║  ██║╚════██║
+██╔═██╗ ██╔══╝    ╚██╔╝  ██╔══██╗██║██║╚██╗ ██║██║  ██║╚════██║
 ██║  ██╗███████╗   ██║   ██████╔╝██║██║ ╚████║██████╔╝███████║
 ╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═════╝ ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝
 */
@@ -386,7 +388,7 @@ binds {
   // Clipboard
   Mod+V { spawn "bash" "-c" "pkill fuzzel || cliphist list | fuzzel  --match-mode fzf --dmenu --anchor center --lines 15 --width 80 | cliphist decode | wl-copy"; }
 
-    // Volume (PipeWire)
+  // Volume (PipeWire)
   XF86AudioRaiseVolume repeat=true allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
   XF86AudioLowerVolume repeat=true allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
   XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
@@ -492,11 +494,15 @@ spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 
 // Environment Variables
 environment {
+  DMS_DISABLE_MATUGEN "0"
   QT_QPA_PLATFORM "wayland"
   ELECTRON_OZONE_PLATFORM_HINT "auto"
   EDITOR "nvim"
   MOZ_ENABLE_WAYLAND "1"
   DISPLAY ":3"
+
+  // DMS expects a desktop name; harmless to keep here
+  XDG_CURRENT_DESKTOP "niri"
 }
 
 // Miscellaneous Settings
@@ -517,3 +523,14 @@ cursor {
   xcursor-size 24
   hide-when-typing
 }
+
+/* ---------------------------------------------------------
+   DMS integration (added; everything above is your old config)
+   Keep these at the very end.
+--------------------------------------------------------- */
+
+include "dms/colors.kdl"
+include "dms/layout.kdl"
+include "dms/alttab.kdl"
+include "dms/binds.kdl"
+

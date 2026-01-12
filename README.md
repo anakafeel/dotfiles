@@ -1,5 +1,8 @@
 # Hyprland Dotfiles 🎨
 This repository contains my configuration files (**dotfiles**) for customizing my **Hyprland** setup. I use **GNU Stow** for efficient management of dotfiles by leveraging symlinks, enabling a clean, modular, and centralized system.
+### wifi issues fix : 
+`nmcli general status`
+`ncmli networking on`
 
 ----
 

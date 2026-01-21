@@ -621,3 +621,7 @@ binds {
     Mod+Shift+P { power-off-monitors; }
 }
 //include "./noctalia.kdl"
+
+include "basicsettings.kdl" // Added by niri-settings
+
+include "keybinds.kdl" // Added by niri-settings

@@ -1,79 +1,30 @@
-// This config is in the KDL format: https://kdl.dev
-// "/-" comments out the following node.
-// Check the wiki for a full description of the configuration:
-// https://yalter.github.io/niri/Configuration:-Introduction
+gestures {
+    hot-corners {
+        off
+    }
+}
 
-// Input device configuration.
-// Find the full list of options on the wiki:
-// https://yalter.github.io/niri/Configuration:-Input
-prefer-no-csd
 input {
     keyboard {
         repeat-rate 35
-        repeat-delay 200 
+        repeat-delay 200
         xkb {
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
-
-            // For example:
-            // layout "us,ru"
-            // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
-
-            // If this section is empty, niri will fetch xkb settings
-            // from org.freedesktop.locale1. You can control these using
-            // localectl set-x11-keymap.
         }
-
-        // Enable numlock on startup, omitting this setting disables it.
         numlock
     }
 
-    // Next sections include libinput settings.
-    // Omitting settings disables them, or leaves them at their default values.
-    // All commented-out settings here are examples, not defaults.
     touchpad {
-        // off
         tap
-        // dwt
-        // dwtp
-        // drag false
-        // drag-lock
         natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "two-finger"
-        // disabled-on-external-mouse
     }
 
     mouse {
-        // off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "no-scroll"
     }
 
-    trackpoint {
-        // off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "on-button-down"
-        // scroll-button 273
-        // scroll-button-lock
-        // middle-emulation
-    }
-
-    // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
-
-    // Focus windows and outputs automatically when moving the mouse into them.
-    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse max-scroll-amount="0%"
 }
 
 output "eDP-1" {
-    // Laptop Display
     mode "1920x1080@143.998"
     scale 1.0
     transform "normal"
@@ -81,17 +32,16 @@ output "eDP-1" {
 }
 
 output "DP-2" {
-    // LG UltraGear External Monitor
     mode "1920x1080@143.981"
     scale 1.0
     transform "normal"
     position x=0 y=0
-   // variable-refresh-rate on
+    // variable-refresh-rate on
 }
 
 layout {
-    gaps 16
-
+    gaps 5
+    background-color "#000"
     center-focused-column "never"
 
     preset-column-widths {
@@ -103,161 +53,169 @@ layout {
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 4
-        active-color "#7fc8ff"
-        inactive-color "#505050"
+        width 1
+        active-color "#ffffff33"
     }
 
     border {
         off
-        width 4
-        active-color "#ffc87f"
-        inactive-color "#505050"
-        urgent-color "#9b0000"
+        width 1
+        active-color "#555"
+        inactive-color "#222"
     }
 
-    // CHANGED: enabled shadows
     shadow {
         on
-        softness 30
+        softness 20
         spread 5
         offset x=0 y=5
-        color "#0007"
     }
 
-    struts {
-        // left 64
-        // right 64
-        // top 64
-        // bottom 64
+    tab-indicator {
+        width 2
+        gap -5
+        gaps-between-tabs 5
+        corner-radius 10
+        active-color "#fff"
+        inactive-color "#ffffff55"
+    }
+
+    insert-hint {
+        color "#ffffff22"
     }
 }
 
-spawn-sh-at-startup "quickshell --path ~/.config/quickshell/noctalia-shell/shell.qml"
-spawn-sh-at-startup "swaybg -i ~/Wallpapers/mobpsycho.jpg"
-// ADDED: niri-sidebar daemon
-spawn-at-startup "sh" "-c" "~/.local/bin/niri-sidebar listen"
-
-hotkey-overlay {
-    // skip-at-startup
-}
+prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 animations {
-    // off
-    // slowdown 3.0
+    window-open {
+        spring damping-ratio=1.0 stiffness=700 epsilon=0.0001
+    }
+    window-close {
+        spring damping-ratio=1.0 stiffness=700 epsilon=0.1
+    }
+    window-resize {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.001
+    }
+    window-movement {
+        spring damping-ratio=1.0 stiffness=600 epsilon=0.0001
+    }
+    overview-open-close {
+        spring damping-ratio=1.0 stiffness=900 epsilon=0.0001
+    }
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.00001
+    }
+    horizontal-view-movement {
+        spring damping-ratio=1.0 stiffness=700 epsilon=0.0001
+    }
 }
 
-// Work around WezTerm's initial configure bug
-window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
-
-// Firefox PiP floating
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
 
-// CHANGED: was /-window-rule (disabled) — enabled rounded corners
 window-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 20
     clip-to-geometry true
 }
 
-// ADDED: prevents apps with min-size from breaking sidebar layout
 window-rule {
     match is-floating=true
     min-width 100
     min-height 100
 }
 
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-    block-out-from "screen-capture"
-}
-
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
-
-    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+Space { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-    // CHANGED: swaylock → hyprlock (swaylock not installed, hyprlock is)
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
-
-    Mod+Shift+S { screenshot; }
-    Mod+Alt+S { screenshot-screen; }
-
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
-
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-
     Mod+O repeat=false { toggle-overview; }
+
+    Mod+Return { spawn "alacritty"; }
+    Mod+T { spawn "alacritty"; }
+    Mod+Space { spawn-sh "/home/anakafeel/.local/bin/ignis toggle-window Launcher"; }
+    Super+Alt+L { spawn "hyprlock"; }
+    Mod+E { spawn "nautilus"; }
+    Super+Escape { spawn "ignis" "toggle-window" "PowerMenu"; }
+    Super+I { spawn "ignis" "toggle-window" "Settings"; }
+    Mod+A { spawn "ignis" "toggle-window" "QuickCenter"; }
+
+    // Waypaper
+    Mod+Shift+W { spawn "waypaper"; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    XF86AudioNext         allow-when-locked=true { spawn-sh "playerctl next"; }
+    XF86AudioPause        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioPlay         allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioPrev         allow-when-locked=true { spawn-sh "playerctl previous"; }
+
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     Mod+Q repeat=false { close-window; }
 
+    // Arrow navigation
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
     Mod+Up    { focus-window-up; }
     Mod+Right { focus-column-right; }
-    Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
 
+    // Vim navigation
+    Mod+H { focus-column-left; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+L { focus-column-right; }
+
+    // Arrow movement
     Mod+Ctrl+Left  { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
     Mod+Ctrl+Up    { move-window-up; }
     Mod+Ctrl+Right { move-column-right; }
-    Mod+Ctrl+H     { move-column-left; }
-    Mod+Ctrl+J     { move-window-down; }
-    Mod+Ctrl+K     { move-window-up; }
-    Mod+Ctrl+L     { move-column-right; }
+
+    // Vim movement
+    Mod+Ctrl+H { move-column-left; }
+    Mod+Ctrl+J { move-window-down; }
+    Mod+Ctrl+K { move-window-up; }
+    Mod+Ctrl+L { move-column-right; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
     Mod+Ctrl+Home { move-column-to-first; }
     Mod+Ctrl+End  { move-column-to-last; }
 
+    // Monitor focus
     Mod+Shift+Left  { focus-monitor-left; }
     Mod+Shift+Down  { focus-monitor-down; }
     Mod+Shift+Up    { focus-monitor-up; }
     Mod+Shift+Right { focus-monitor-right; }
-    Mod+Shift+H     { focus-monitor-left; }
-    Mod+Shift+J     { focus-monitor-down; }
-    Mod+Shift+K     { focus-monitor-up; }
-    Mod+Shift+L     { focus-monitor-right; }
+    Mod+Shift+H { focus-monitor-left; }
+    Mod+Shift+J { focus-monitor-down; }
+    Mod+Shift+K { focus-monitor-up; }
+    Mod+Shift+L { focus-monitor-right; }
 
+    // Monitor movement
     Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
     Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
     Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
-    Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
-    Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
-    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+J { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+K { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
 
+    // Workspace navigation
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
     Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
     Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+U              { focus-workspace-down; }
+    Mod+I              { focus-workspace-up; }
     Mod+Ctrl+U         { move-column-to-workspace-down; }
     Mod+Ctrl+I         { move-column-to-workspace-up; }
 
@@ -311,43 +269,49 @@ binds {
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-    Mod+Ctrl+F { expand-column-to-available-width; }
-
     Mod+C { center-column; }
     Mod+Ctrl+C { center-visible-columns; }
+    Mod+Ctrl+F { expand-column-to-available-width; }
+    Mod+W { toggle-column-tabbed-display; }
 
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
-
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
-    Mod+W { toggle-column-tabbed-display; }
+    Mod+Tab { focus-workspace-previous; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
+    Mod+Shift+S { screenshot show-pointer=false; }
+    Ctrl+Print { screenshot-screen show-pointer=false; }
     Alt+Print { screenshot-window; }
 
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+Alt+R { spawn "ignis" "run-command" "recorder-record-screen"; }
+    Mod+Alt+R { spawn "ignis" "run-command" "recorder-record-portal"; }
 
-    Mod+Shift+E { quit; }
-    Ctrl+Alt+Delete { quit; }
-
-    Mod+Shift+P { power-off-monitors; }
-
-    // ADDED: niri-sidebar
-    // Mod+S       — snap focused window into/out of sidebar
-    // Mod+Ctrl+S  — hide/show sidebar (peek mode)
-    // Mod+Ctrl+G  — flip sidebar stack order
+    // niri-sidebar
     Mod+S      { spawn-sh "~/.local/bin/niri-sidebar toggle-window"; }
     Mod+Ctrl+S { spawn-sh "~/.local/bin/niri-sidebar toggle-visibility"; }
     Mod+Ctrl+G { spawn-sh "~/.local/bin/niri-sidebar flip"; }
+
+    // System
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+E { quit; }
+    Ctrl+Alt+Delete { quit; }
+    Mod+Shift+P { power-off-monitors; }
 }
-//include "./noctalia.kdl"
 
-include "basicsettings.kdl" // Added by niri-settings
+overview {
+    backdrop-color "#000"
+    zoom 0.5
+}
 
-include "keybinds.kdl" // Added by niri-settings
+hotkey-overlay {
+    skip-at-startup
+}
+
+spawn-at-startup "/home/anakafeel/.local/bin/ignis" "init"
+spawn-at-startup "swww-daemon"
+spawn-at-startup "sh" "-c" "~/.local/bin/niri-sidebar listen"

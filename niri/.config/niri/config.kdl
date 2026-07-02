@@ -83,25 +83,26 @@ input {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-//output "HDMI-A-1" {
-//    mode "1920x1080@60.000"
-//    position x=0 y=0
-//    scale 1
-//}
+output "eDP-1" {
+//    off
+    mode "1920x1080@143.998"
+    position x=3840 y=0 //right most , for left most make it x=1920,y=0
+    scale 1
+}
 
-//output "eDP-1" {
-//    mode "1920x1080@143.998"
-//    position x=1920 y=0
-//    scale 1
-//}
+output "DP-2" {
+    mode "1920x1080@143.981"
+    position x=1920 y=0 //for shifting position make it x=0,y=0
+    scale 1
+}
 
-//output "DP-2" {
-//    mode "1920x1080@143.981"
-//    position x=3840 y=0
-//    variable-refresh-rate off
-//    scale 1
-//}
+output "HDMI-A-1" {
+    mode "1920x1080@75.000"
+    position x=0 y=0 //for shifting postion make it x=1920,y=0
+    scale 1
+    transform "90" //for flipping make it 270  
 
+}
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
@@ -271,6 +272,8 @@ window-rule {
 }
 debug {
     honor-xdg-activation-with-invalid-serial
+    wait-for-frame-completion-before-queueing
+    render-drm-device "/dev/dri/renderD129"
 }
 
 // Override to disable super+tab

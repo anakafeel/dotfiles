@@ -86,13 +86,13 @@ input {
 output "eDP-1" {
 //    off
     mode "1920x1080@143.998"
-    position x=3840 y=0 //right most , for left most make it x=1920,y=0
+    position x=3000 y=0 //right most , for left most make it x=1920,y=0
     scale 1
 }
 
 output "DP-2" {
     mode "1920x1080@143.981"
-    position x=1920 y=0 //for shifting position make it x=0,y=0
+    position x=1080 y=0 //for shifting position make it x=0,y=0
     scale 1
 }
 

@@ -100,9 +100,10 @@ output "HDMI-A-1" {
     mode "1920x1080@75.000"
     position x=0 y=0 //for shifting postion make it x=1920,y=0
     scale 1
-    transform "90" //for flipping make it 270  
+   transform "90" //for flipping make it 270  
 
 }
+
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout

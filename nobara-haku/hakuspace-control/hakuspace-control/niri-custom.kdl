@@ -1,0 +1,143 @@
+//          _   ___      _ 
+//         / | / (_)____(_)
+//        /  |/ / / ___/ / 
+//       / /|  / / /  / /  
+//      /_/ |_/_/_/  /_/   
+//                         
+
+// This is a niri custom configuration file (small config.kdl actually :p)
+// You can add keybindings, rules, and other configurations here.
+
+// Why you should custom your config in there?
+// Because for each update, my dotfiles will override your all custom configurations.
+
+// After changes, please reload Niri by `niri msg action load-config-file` on terminal
+
+// See more in the Wiki: https://github.com/niri-wm/niri/wiki
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+Alt+L hotkey-overlay-title="Lock Screen" { spawn "hyprlock"; }
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Shift+Down  { focus-monitor-down; }
+    Mod+Shift+Up    { focus-monitor-up; }
+    Mod+Shift+Right { focus-monitor-right; }
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Ctrl+Shift+W { move-column-to-monitor-up; }
+    Mod+Ctrl+Shift+A { move-column-to-monitor-left; }
+    Mod+Ctrl+Shift+S { move-column-to-monitor-down; }
+    Mod+Ctrl+Shift+D { move-column-to-monitor-right; }
+    Mod+Page_Down      { focus-workspace-down; }
+    Mod+Page_Up        { focus-workspace-up; }
+    Mod+U              { focus-workspace-down; }
+    Mod+I              { focus-workspace-up; }
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+Ctrl+U         { move-column-to-workspace-down; }
+    Mod+Ctrl+I         { move-column-to-workspace-up; }
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+    Mod+Shift+U         { move-workspace-down; }
+    Mod+Shift+I         { move-workspace-up; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+C { center-visible-columns; }
+    Mod+Shift+S { screenshot; }
+    Mod+Return { spawn "kitty"; }
+
+    // Restore original core muscle-memory
+    Mod+Q repeat=false { close-window; }
+    Mod+Space hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
+    Mod+O repeat=false { toggle-overview; }
+
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-down; }
+    Mod+K     { focus-window-up; }
+    Mod+L     { focus-column-right; }
+    Mod+W     { focus-window-up; }
+    Mod+A     { focus-column-left; }
+    Mod+S     { focus-window-down; }
+    Mod+D     { focus-column-right; }
+
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Down  { move-window-down; }
+    Mod+Ctrl+Up    { move-window-up; }
+    Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+H     { move-column-left; }
+    Mod+Ctrl+J     { move-window-down; }
+    Mod+Ctrl+K     { move-window-up; }
+    Mod+Ctrl+L     { move-column-right; }
+    Mod+Ctrl+W     { move-window-up; }
+    Mod+Ctrl+A     { move-column-left; }
+    Mod+Ctrl+S     { move-window-down; }
+    Mod+Ctrl+D     { move-column-right; }
+    Mod+Ctrl+Shift+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+Shift+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+Shift+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+Shift+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+Shift+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+Shift+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+Shift+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+Shift+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+R { switch-preset-column-width; }
+    Mod+F { maximize-column; }
+    Mod+C { center-column; }
+    Mod+V { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+X { toggle-column-tabbed-display; }
+
+    // Re-home hakuspace's own scripts onto free keys, so nothing gets lost
+    Mod+Comma        hotkey-overlay-title="Clipboard Menu" { spawn "sh" "-c" "$HOME/.local/bin/clipboard_menu.sh"; }
+    Mod+Shift+Comma  hotkey-overlay-title="Wipe Clipboard" { spawn "sh" "-c" "$HOME/.local/bin/clipboard_menu.sh --wipe"; }
+    Mod+F11          hotkey-overlay-title="Record Screen" { spawn "sh" "-c" "$HOME/.local/bin/record.sh"; }
+    Mod+Grave        hotkey-overlay-title="Haku Menu" { spawn "sh" "-c" "$HOME/.local/bin/hakumenu.sh"; }
+    Mod+Y            hotkey-overlay-title="Wallpaper Select" { spawn "sh" "-c" "$HOME/.local/bin/wallpaper_select.sh"; }
+    Mod+Shift+Y      hotkey-overlay-title="Lively Wallpaper Select" { spawn "sh" "-c" "$HOME/.local/bin/wallpaper_video_select.sh"; }
+    Mod+Shift+W      hotkey-overlay-title="Cycle Waybar Mode" { spawn "sh" "-c" "$HOME/.local/bin/waybar_manager.sh --cycle"; }
+    Mod+Period       hotkey-overlay-title="Toggle Dockbar" { spawn "sh" "-c" "$HOME/.local/bin/dockbar_manager.sh --toggle"; }
+    Mod+N            hotkey-overlay-title="Open Notification Center" { spawn "swaync-client" "-t" "-sw"; }
+    Mod+E            hotkey-overlay-title="Open File Manager: thunar" { spawn "thunar"; }
+    Mod+B            hotkey-overlay-title="Open Browser: zen-browser" { spawn "zen-browser"; }
+    Mod+Slash        hotkey-overlay-title="Open Emoji Menu" { spawn "rofi" "-modi" "emoji" "-show" "emoji"; }
+
+    Mod+Shift+E { quit; }
+    Ctrl+Alt+Delete { quit; }
+}
+
+output "eDP-1" {
+    mode "1920x1080@143.998"
+    position x=3000 y=0
+    scale 1
+}
+
+output "DP-2" {
+    mode "1920x1080@143.981"
+    position x=1080 y=0
+    scale 1
+}
+
+output "HDMI-A-1" {
+    mode "1920x1080@60.000"
+    position x=0 y=0
+    transform "90"
+}
+
+debug {
+    honor-xdg-activation-with-invalid-serial
+    wait-for-frame-completion-before-queueing
+    render-drm-device "/dev/dri/renderD128"
+}
+

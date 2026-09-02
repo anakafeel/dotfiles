@@ -1,0 +1,8 @@
+# Cache / runtime state — regenerated automatically, not portable across machines
+**/cache/
+**/.cache/
+*.log
+
+# Editor / OS cruft
+.DS_Store
+*.swp

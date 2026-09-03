@@ -1,5 +1,5 @@
 # Zsh Wiki: https://github.com/ohmyzsh/ohmyzsh/wiki
-
+"$HOME/.local/bin/random_fastfetch.sh"
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes

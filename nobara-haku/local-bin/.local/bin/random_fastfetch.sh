@@ -2,30 +2,31 @@
 
 # Pick a random logo for fastfetch from three sources - your own
 # ascii/ collection, pokemon-colorscripts, and shell-color-scripts -
-# positioned side-by-side (art left, info panel right) and sized to
-# fit the current terminal.
+# and paste it beside the info panel ourselves (art left, info right).
 #
-# config.jsonc sets logo.position to "top", which always stacks art
-# above the info panel regardless of padding - override it here.
+# fastfetch's own side-by-side join (logo-position left + file/file-raw)
+# doesn't correctly measure visible width for lines with heavy/variable
+# ANSI truecolor escape codes (pokemon-colorscripts, several
+# shell-color-scripts pieces): the module column lands at a different
+# column on every row instead of lining up, because fastfetch's width
+# count for raw logo lines gets thrown off by the escape bytes. So we
+# don't use fastfetch's join at all - we capture the module panel text
+# via `fastfetch --logo none`, measure each logo line's true visible
+# width ourselves (ANSI stripped), and paste the two columns together
+# by hand, padding every row out to the same fixed column.
 #
-# fastfetch has no width/height scaling for text/raw logos, so we
-# can't shrink oversized art. Instead:
-#   - measure the info panel's own rendered width each run (dynamic -
-#     username, package counts, etc. shift it slightly)
-#   - reserve that width plus a small gap on the right
-#   - center the art in whatever's left; if it doesn't fit, left-align
-#     it (padding 0) instead of centering something that doesn't fit
-#   - cap vertical overflow with --logo-print-remaining false
+# Centering logic is unchanged: reserve the info panel's own width plus
+# a small gap, center the art in whatever's left, or left-align it
+# (padding 0) if it doesn't fit. Art taller than the info panel is
+# capped to the info panel's height instead of overflowing the terminal.
 
 ASCII_DIR="$HOME/.config/fastfetch/ascii"
 SHELL_COLORSCRIPTS_DIR="$HOME/.local/share/shell-color-scripts/colorscripts"
 GAP=2
+RESET=$'\033[0m'
 
 strip_ansi() { sed -r 's/\x1b\[[0-9;]*[a-zA-Z]//g'; }
-
-TMP_LOGO=""
-cleanup() { [[ -n "$TMP_LOGO" ]] && rm -f "$TMP_LOGO"; }
-trap cleanup EXIT
+vis_width() { printf '%s' "$1" | strip_ansi | wc -m; }
 
 mapfile -t LOCAL_LOGOS < <(find "$ASCII_DIR" -maxdepth 1 -name '*.txt' -type f -size +0c 2>/dev/null)
 mapfile -t COLORSCRIPTS < <(find "$SHELL_COLORSCRIPTS_DIR" -maxdepth 1 -type f -executable 2>/dev/null)
@@ -46,37 +47,49 @@ SOURCE="${SOURCES[RANDOM % ${#SOURCES[@]}]}"
 
 case "$SOURCE" in
     local)
-        LOGO="${LOCAL_LOGOS[RANDOM % ${#LOCAL_LOGOS[@]}]}"
+        LOGO_CONTENT="$(cat "${LOCAL_LOGOS[RANDOM % ${#LOCAL_LOGOS[@]}]}")"
         ;;
     pokemon)
-        TMP_LOGO=$(mktemp)
-        pokemon-colorscripts --no-title -r > "$TMP_LOGO"
-        LOGO="$TMP_LOGO"
+        LOGO_CONTENT="$(pokemon-colorscripts --no-title -r)"
         ;;
     shellcolor)
-        TMP_LOGO=$(mktemp)
-        "${COLORSCRIPTS[RANDOM % ${#COLORSCRIPTS[@]}]}" > "$TMP_LOGO"
-        LOGO="$TMP_LOGO"
+        LOGO_CONTENT="$("${COLORSCRIPTS[RANDOM % ${#COLORSCRIPTS[@]}]}")"
         ;;
 esac
+
+mapfile -t LOGO_LINES <<< "$LOGO_CONTENT"
+mapfile -t INFO_LINES < <(fastfetch --logo none "$@")
+
+LOGO_WIDTH=0
+for line in "${LOGO_LINES[@]}"; do
+    w=$(vis_width "$line")
+    (( w > LOGO_WIDTH )) && LOGO_WIDTH=$w
+done
+
+INFO_WIDTH=0
+for line in "${INFO_LINES[@]}"; do
+    w=$(vis_width "$line")
+    (( w > INFO_WIDTH )) && INFO_WIDTH=$w
+done
 
 COLS=$(tput cols 2>/dev/null)
 [[ "$COLS" =~ ^[0-9]+$ ]] || COLS=80
 
-LOGO_WIDTH=$(strip_ansi < "$LOGO" | wc -L)
-INFO_WIDTH=$(fastfetch --logo none 2>/dev/null | strip_ansi | wc -L)
 AVAILABLE=$(( COLS - INFO_WIDTH - GAP ))
-
 if (( AVAILABLE <= LOGO_WIDTH )); then
     PADDING_LEFT=0
 else
     PADDING_LEFT=$(( (AVAILABLE - LOGO_WIDTH) / 2 ))
 fi
 
-exec fastfetch \
-    --logo-type file-raw --logo "$LOGO" \
-    --logo-position left \
-    --logo-padding-left "$PADDING_LEFT" \
-    --logo-padding-right "$GAP" \
-    --logo-print-remaining false \
-    "$@"
+TARGET_COL=$(( PADDING_LEFT + LOGO_WIDTH + GAP ))
+
+ROWS=${#INFO_LINES[@]}
+for (( i = 0; i < ROWS; i++ )); do
+    logo_line="${LOGO_LINES[i]:-}"
+    info_line="${INFO_LINES[i]:-}"
+    logo_vis_width=$(vis_width "$logo_line")
+    fill=$(( TARGET_COL - PADDING_LEFT - logo_vis_width ))
+    (( fill < 0 )) && fill=0
+    printf '%*s%s%s%*s%s\n' "$PADDING_LEFT" "" "$logo_line" "$RESET" "$fill" "" "$info_line"
+done

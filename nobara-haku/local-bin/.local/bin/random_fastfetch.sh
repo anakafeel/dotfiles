@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Pick a random logo for fastfetch from three sources - your own
-# ascii/ collection, pokemon-colorscripts, and shell-color-scripts -
-# and paste it beside the info panel ourselves (art left, info right).
+# Pick a random logo for fastfetch from pokemon-colorscripts and
+# shell-color-scripts, and paste it beside the info panel ourselves
+# (art left, info right).
 #
 # fastfetch's own side-by-side join (logo-position left + file/file-raw)
 # doesn't correctly measure visible width for lines with heavy/variable
@@ -20,7 +20,6 @@
 # (padding 0) if it doesn't fit. Art taller than the info panel is
 # capped to the info panel's height instead of overflowing the terminal.
 
-ASCII_DIR="$HOME/.config/fastfetch/ascii"
 SHELL_COLORSCRIPTS_DIR="$HOME/.local/share/shell-color-scripts/colorscripts"
 GAP=2
 RESET=$'\033[0m'
@@ -28,14 +27,11 @@ RESET=$'\033[0m'
 strip_ansi() { sed -r 's/\x1b\[[0-9;]*[a-zA-Z]//g'; }
 vis_width() { printf '%s' "$1" | strip_ansi | wc -m; }
 
-mapfile -t LOCAL_LOGOS < <(find "$ASCII_DIR" -maxdepth 1 -name '*.txt' -type f -size +0c 2>/dev/null)
 mapfile -t COLORSCRIPTS < <(find "$SHELL_COLORSCRIPTS_DIR" -maxdepth 1 -type f -executable 2>/dev/null)
 
 # Pick a source *category* first, not a flat pool of every file -
-# otherwise shell-color-scripts' 50+ files and pokemon's 1000+ species
-# would drown out your own hand-picked art.
+# otherwise shell-color-scripts' 50+ files would drown out pokemon.
 SOURCES=()
-[[ ${#LOCAL_LOGOS[@]} -gt 0 ]] && SOURCES+=("local")
 command -v pokemon-colorscripts >/dev/null 2>&1 && SOURCES+=("pokemon")
 [[ ${#COLORSCRIPTS[@]} -gt 0 ]] && SOURCES+=("shellcolor")
 
@@ -46,9 +42,6 @@ fi
 SOURCE="${SOURCES[RANDOM % ${#SOURCES[@]}]}"
 
 case "$SOURCE" in
-    local)
-        LOGO_CONTENT="$(cat "${LOCAL_LOGOS[RANDOM % ${#LOCAL_LOGOS[@]}]}")"
-        ;;
     pokemon)
         LOGO_CONTENT="$(pokemon-colorscripts --no-title -r)"
         ;;
@@ -80,6 +73,22 @@ if (( AVAILABLE <= LOGO_WIDTH )); then
     PADDING_LEFT=0
 else
     PADDING_LEFT=$(( (AVAILABLE - LOGO_WIDTH) / 2 ))
+fi
+
+# If the joined line (logo + gap + info panel) is still wider than the
+# terminal even with padding at 0, side-by-side isn't possible without
+# each row wrapping onto an extra physical line - which scatters the
+# info panel across lines interleaved with the art. Stack instead: art
+# on top (centered on its own, or left-aligned if it alone doesn't
+# fit), info panel below.
+if (( LOGO_WIDTH + GAP + INFO_WIDTH > COLS )); then
+    LOGO_PAD=0
+    (( COLS > LOGO_WIDTH )) && LOGO_PAD=$(( (COLS - LOGO_WIDTH) / 2 ))
+    for line in "${LOGO_LINES[@]}"; do
+        printf '%*s%s%s\n' "$LOGO_PAD" "" "$line" "$RESET"
+    done
+    printf '%s\n' "${INFO_LINES[@]}"
+    exit 0
 fi
 
 TARGET_COL=$(( PADDING_LEFT + LOGO_WIDTH + GAP ))

@@ -1,0 +1,12 @@
+# Cache / runtime state — regenerated automatically, not portable across machines
+**/cache/
+**/.cache/
+*.log
+
+# Backups made while tweaking configs
+*.backup*
+*.bak
+
+# Editor / OS cruft
+.DS_Store
+*.swp

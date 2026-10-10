@@ -1,0 +1,30 @@
+ TMUX  ─  Alt is your Super inside the terminal        prefix: Ctrl+Space
+ ────────────────────────────────────────────────────────────────────────
+ Alt+Enter          split right            Alt+Shift+Enter    split down
+ Alt+T              new window             Alt+Q              close pane
+ Alt+H J K L / ←↓↑→ focus pane (and nvim splits)
+ Alt+Ctrl+H J K L   swap pane in that direction
+ Alt+1..9           go to window           Alt+Shift+1..9     send pane to window
+ Alt+U / Alt+I      next / prev window     Alt+Shift+U / I    move window right / left
+ Alt+F              zoom pane              Alt+R              cycle layouts
+ Alt+- / Alt+=      pane width -/+         Alt+_ / Alt++      pane height -/+
+ Alt+O              session/window tree    Alt+V              copy mode (v select, y copy)
+ prefix d           detach                 prefix r           reload config
+ prefix Ctrl+s      save session           prefix Ctrl+r      restore session
+ prefix ?           list every tmux bind   prefix I           install plugins
+
+ NEOVIM (LazyVim)  ─  press Space and wait: a popup shows every leader key
+ ────────────────────────────────────────────────────────────────────────
+ Space Space        find file              Space /            grep in project
+ Space e            file explorer          Space ,            switch buffer
+ Space g g          lazygit                Space l            plugin manager (Lazy)
+ Space b d          close buffer           Space q q          quit all
+ Space c a          code action            Space c r          rename symbol
+ g d / g r          go to definition / references       K   hover docs
+ Ctrl+/             toggle terminal        Space x x          diagnostics list
+ Shift+H / Shift+L  prev / next buffer     Space -  /  Space |   split below / right
+ Alt+H J K L        move between splits (and tmux panes)
+ s                  jump anywhere (flash)  gcc / gc           comment line / selection
+ :w  save   :q  quit   u  undo   Ctrl+R  redo   :Tutor  learn vim motions
+
+ q to close

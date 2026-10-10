@@ -1,0 +1,35 @@
+{
+  "lockfileVersion": 1,
+  "plugins": {
+    "cavaVisualizer": {
+      "repo": "https://github.com/ernestowgg/cava-visualizer",
+      "commit": "2d08bef95bc7cd170ad5730a27791c9af6d80a52"
+    },
+    "claudeCodeUsage": {
+      "repo": "https://github.com/titeya/dms-claudecode",
+      "commit": "20a936f20c4785647a8317c9f60e7b168ca25b5b"
+    },
+    "dankKDEConnect": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankKDEConnect",
+      "commit": "a8a508bc371e7c3f2c7862d8840b88cf5c63978f"
+    },
+    "digitalClock": {
+      "repo": "https://github.com/Kavotax/LCD-Digital-Clock.git",
+      "commit": "7093b7827607e059dc4a4ffc3579a42591be09d9"
+    },
+    "prayerTimes": {
+      "repo": "https://github.com/muadzmo/prayertimes",
+      "commit": "d9ee1b1d51152b1d9ae792281d8e6a9a7f39a86a"
+    },
+    "quickCapture": {
+      "repo": "https://github.com/hthienloc/dms-plugins",
+      "path": "quickCapture",
+      "commit": "30841c817c152bda1c969e0b91d034ccc9a75b86"
+    },
+    "wallpaperCarousel": {
+      "repo": "https://github.com/motor-dev/wallpaperCarousel",
+      "commit": "761ecd1b7f347beee9f17909f8334d987c935a1a"
+    }
+  }
+}

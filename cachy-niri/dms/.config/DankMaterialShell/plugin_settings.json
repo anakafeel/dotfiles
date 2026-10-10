@@ -1,0 +1,18 @@
+{
+  "quickCapture": {
+    "enabled": true
+  },
+  "wallpaperCarousel": {
+    "enabled": true
+  },
+  "dankKDEConnect": {
+    "enabled": false,
+    "selectedDeviceId": ""
+  },
+  "claudeCodeUsage": {
+    "enabled": true
+  },
+  "prayerTimes": {
+    "enabled": true
+  }
+}

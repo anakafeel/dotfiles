@@ -1,0 +1,12 @@
+
+[Default Applications]
+text/plain=vim.desktop
+text/x-shellscript=vim.desktop
+text/x-python=vim.desktop
+text/x-script.python=vim.desktop
+text/html=brave-browser.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/http=brave-browser.desktop
+x-scheme-handler/https=brave-browser.desktop
+x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/unknown=brave-browser.desktop

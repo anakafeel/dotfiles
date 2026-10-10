@@ -59,6 +59,9 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
 
+    // Maximize, or halve a column that's already full width (e.g. opened that way)
+    Mod+F hotkey-overlay-title="Toggle Maximize Column" { spawn "sh" "-c" "$HOME/.local/bin/niri-toggle-maximize.sh"; }
+
     Mod+Slash hotkey-overlay-title="Keybind Cheat Sheet" { spawn "dms" "ipc" "call" "keybinds" "toggle" "niri"; }
     Mod+Ctrl+Slash hotkey-overlay-title="tmux / nvim Cheat Sheet" { spawn "sh" "-c" "$HOME/.local/bin/terminal-cheatsheet.sh"; }
 

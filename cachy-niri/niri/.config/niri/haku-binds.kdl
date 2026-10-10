@@ -7,9 +7,11 @@
 //   Mod+Ctrl+Shift + Arrows/HJKL/WASD   move column to monitor
 binds {
     // === Focus (WASD on top of DMS's arrows/HJKL) ===
-    Mod+W { focus-window-up; }
+    // W/S fall through to the next workspace when there's no window above/below,
+    // so they also navigate workspaces in the overview.
+    Mod+W { focus-window-or-workspace-up; }
     Mod+A { focus-column-left; }
-    Mod+S { focus-window-down; }
+    Mod+S { focus-window-or-workspace-down; }
     Mod+D { focus-column-right; }
 
     // === Move window/column ===

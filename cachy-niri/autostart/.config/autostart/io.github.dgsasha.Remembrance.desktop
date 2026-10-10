@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Reminders
+X-XDP-Autostart=io.github.dgsasha.Remembrance
+Exec=flatpak run --command=/app/libexec/remembrance-service io.github.dgsasha.Remembrance
+X-Flatpak=io.github.dgsasha.Remembrance

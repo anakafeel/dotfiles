@@ -2,11 +2,12 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- Alt = niri's Super inside the terminal: Alt+HJKL / arrows move focus across
+-- Alt = niri's Super inside the terminal: Alt+HJKL / arrows / Alt+W,S move focus across
 -- nvim splits and tmux panes alike. Overrides LazyVim's normal-mode Alt+J/K
 -- line moving (still works in visual mode on a selection).
 local nav = {
   h = "TmuxNavigateLeft", j = "TmuxNavigateDown", k = "TmuxNavigateUp", l = "TmuxNavigateRight",
+  w = "TmuxNavigateUp", s = "TmuxNavigateDown",
   Left = "TmuxNavigateLeft", Down = "TmuxNavigateDown", Up = "TmuxNavigateUp", Right = "TmuxNavigateRight",
 }
 for key, cmd in pairs(nav) do

@@ -3,6 +3,7 @@
  Alt+Enter          split right            Alt+Shift+Enter    split down
  Alt+T              new window             Alt+Q              close pane
  Alt+H J K L / ←↓↑→ focus pane (and nvim splits)
+Alt+W / Alt+S      focus pane up / down (and nvim splits)
  Alt+Ctrl+H J K L   swap pane in that direction
  Alt+1..9           go to window           Alt+Shift+1..9     send pane to window
  Alt+U / Alt+I      next / prev window     Alt+Shift+U / I    move window right / left
@@ -23,7 +24,7 @@
  g d / g r          go to definition / references       K   hover docs
  Ctrl+/             toggle terminal        Space x x          diagnostics list
  Shift+H / Shift+L  prev / next buffer     Space -  /  Space |   split below / right
- Alt+H J K L        move between splits (and tmux panes)
+ Alt+H J K L, W/S   move between splits (and tmux panes)
  s                  jump anywhere (flash)  gcc / gc           comment line / selection
  :w  save   :q  quit   u  undo   Ctrl+R  redo   :Tutor  learn vim motions
 

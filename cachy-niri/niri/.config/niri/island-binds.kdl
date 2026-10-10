@@ -1,0 +1,14 @@
+// Dynamic island shortcuts (DankIsland activities via `dms ipc call island ...`).
+// Loaded after dms/binds.kdl and haku-binds.kdl so these override the stock popout binds.
+// Control Center / Dashboard / Media live on Mod+Alt so Mod+W/A/S/D stay free for WASD focus.
+binds {
+    Mod+Alt+A hotkey-overlay-title="Island: Control Center" { spawn "dms" "ipc" "call" "island" "toggle" "controlcenter"; }
+    Mod+Alt+D hotkey-overlay-title="Island: Dashboard" { spawn "dms" "ipc" "call" "island" "toggle" "home"; }
+    Mod+Alt+S hotkey-overlay-title="Island: Media" { spawn "dms" "ipc" "call" "island" "toggle" "media"; }
+    Mod+G hotkey-overlay-title="Island: Weather" { spawn "dms" "ipc" "call" "island" "toggle" "weather"; }
+    Mod+Space hotkey-overlay-title="Island: Launcher" { spawn "dms" "ipc" "call" "island" "toggle" "launcher"; }
+    Mod+Y hotkey-overlay-title="Island: Wallpapers" { spawn "dms" "ipc" "call" "island" "toggle" "wallpaper"; }
+    Mod+N hotkey-overlay-title="Island: Notifications" { spawn "dms" "ipc" "call" "island" "toggle" "notificationcenter"; }
+    Mod+Alt+L hotkey-overlay-title="Lock Screen (hyprlock)" { spawn "loginctl" "lock-session"; }
+    Mod+Alt+R hotkey-overlay-title="Restart DMS shell" { spawn "dms" "restart"; }
+}

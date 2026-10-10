@@ -1,0 +1,42 @@
+{
+  "id": "islandMint",
+  "name": "Island Mint",
+  "dark": {
+    "primary": "#3ee6b4",
+    "primaryText": "#00201a",
+    "primaryContainer": "#005142",
+    "secondary": "#7ff5d2",
+    "surface": "#0d1412",
+    "surfaceText": "#dde4e0",
+    "surfaceVariant": "#3f4945",
+    "surfaceVariantText": "#bec9c4",
+    "surfaceTint": "#3ee6b4",
+    "background": "#0d1412",
+    "backgroundText": "#dde4e0",
+    "outline": "#89938f",
+    "surfaceContainerLowest": "#080f0d",
+    "surfaceContainerLow": "#151d1a",
+    "surfaceContainer": "#19211e",
+    "surfaceContainerHigh": "#232b28",
+    "surfaceContainerHighest": "#2e3633"
+  },
+  "light": {
+    "primary": "#006b56",
+    "primaryText": "#ffffff",
+    "primaryContainer": "#7ff8d0",
+    "secondary": "#4a635b",
+    "surface": "#f5fbf7",
+    "surfaceText": "#171d1b",
+    "surfaceVariant": "#dbe5e0",
+    "surfaceVariantText": "#3f4945",
+    "surfaceTint": "#006b56",
+    "background": "#f5fbf7",
+    "backgroundText": "#171d1b",
+    "outline": "#6f7975",
+    "surfaceContainerLowest": "#ffffff",
+    "surfaceContainerLow": "#eff5f1",
+    "surfaceContainer": "#e9efeb",
+    "surfaceContainerHigh": "#e3eae6",
+    "surfaceContainerHighest": "#dee4e0"
+  }
+}

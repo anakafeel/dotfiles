@@ -39,6 +39,9 @@ unfocused-split-fill = #44464f
 # Tab configuration
 gtk-titlebar = false
 
+# Always start in tmux: attach to "main", or create it
+command = tmux new-session -A -s main
+
 # Shell integration
 shell-integration = detect
 shell-integration-features = cursor,sudo,title,no-cursor

@@ -1,0 +1,65 @@
+// Binds brought over from the old hakuspace setup (nobara-haku/niri-custom.kdl).
+// Loaded after dms/binds.kdl so these override the stock DMS layout.
+//
+//   Mod + Arrows/HJKL/WASD              focus window/column
+//   Mod+Ctrl + Arrows/HJKL/WASD         move window/column
+//   Mod+Shift + Arrows/HJKL             focus monitor
+//   Mod+Ctrl+Shift + Arrows/HJKL/WASD   move column to monitor
+binds {
+    // === Focus (WASD on top of DMS's arrows/HJKL) ===
+    Mod+W { focus-window-up; }
+    Mod+A { focus-column-left; }
+    Mod+S { focus-window-down; }
+    Mod+D { focus-column-right; }
+
+    // === Move window/column ===
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Down  { move-window-down; }
+    Mod+Ctrl+Up    { move-window-up; }
+    Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+H     { move-column-left; }
+    Mod+Ctrl+J     { move-window-down; }
+    Mod+Ctrl+K     { move-window-up; }
+    Mod+Ctrl+L     { move-column-right; }
+    Mod+Ctrl+W     { move-window-up; }
+    Mod+Ctrl+A     { move-column-left; }
+    Mod+Ctrl+S     { move-window-down; }
+    Mod+Ctrl+D     { move-column-right; }
+
+    // === Focus monitor ===
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Shift+Down  { focus-monitor-down; }
+    Mod+Shift+Up    { focus-monitor-up; }
+    Mod+Shift+Right { focus-monitor-right; }
+    Mod+Shift+H     { focus-monitor-left; }
+    Mod+Shift+J     { focus-monitor-down; }
+    Mod+Shift+K     { focus-monitor-up; }
+    Mod+Shift+L     { focus-monitor-right; }
+
+    // === Move column to monitor (arrows/HJKL already come from DMS) ===
+    Mod+Ctrl+Shift+W { move-column-to-monitor-up; }
+    Mod+Ctrl+Shift+A { move-column-to-monitor-left; }
+    Mod+Ctrl+Shift+S { move-column-to-monitor-down; }
+    Mod+Ctrl+Shift+D { move-column-to-monitor-right; }
+
+    // === Workspaces (Mod+Ctrl+Up/Down are now window moves) ===
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+    Mod+Ctrl+Shift+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+Shift+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+Shift+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+Shift+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+Shift+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+Shift+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+Shift+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+Shift+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+Shift+9 { move-column-to-workspace 9; }
+
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
+
+    Mod+Slash hotkey-overlay-title="Keybind Cheat Sheet" { spawn "dms" "ipc" "call" "keybinds" "toggle" "niri"; }
+    Mod+Ctrl+Slash hotkey-overlay-title="tmux / nvim Cheat Sheet" { spawn "sh" "-c" "$HOME/.local/bin/terminal-cheatsheet.sh"; }
+
+    // Tabbed columns lost Mod+W to WASD
+    Mod+Shift+X { toggle-column-tabbed-display; }
+}

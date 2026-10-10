@@ -1,0 +1,13 @@
+{
+  "id": "islandClock",
+  "name": "Island Clock",
+  "description": "Day name, dot-matrix time and date/month tiles (replica of the r/unixporn DMS dynamic island setup)",
+  "version": "1.0.0",
+  "author": "local",
+  "type": "desktop",
+  "capabilities": ["desktop-widget", "clock"],
+  "component": "./IslandClockWidget.qml",
+  "icon": "schedule",
+  "requires_dms": ">=1.2.0",
+  "permissions": ["settings_read"]
+}
